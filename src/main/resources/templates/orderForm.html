@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SushiKhan</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+    <form method="post" th:action="@{/orders}" th:object="${sushiOrder}">
+        <h1>Order your own sushi!</h1>
+        <h3>Your sushi in this order: </h3>
+        <a th:href="@{/design}" id="another">Design another sushi</a><br/>
+        <ul>
+            <li th:each="sushi: ${sushiOrder.sushiList}">
+                <span th:text="${sushi.name}">sushi name</span>
+            </li>
+        </ul>
+
+        <h3>Deliver my sushi to: </h3>
+        
+        <img th:src="@{/images/kislinka.jpg}">
+        <br/>
+        
+        <label for="deliveryName">Name: </label>
+        <input type="text" th:field="*{deliveryName}"/>
+        <br/>
+
+        <label for="deliveryStreet">Street: </label>
+        <input type="text" th:field="*{deliveryStreet}"/>
+        <br/>
+
+        <label for="deliveryHouse">House: </label>
+        <input type="text" th:field="*{deliveryHouse}"/>
+        <br/>
+
+        <label for="deliveryCity">City/Village: </label>
+        <input type="text" th:field="*{deliveryCity}"/>
+        <br/>
+
+        <label for="deliveryRegion">Region: </label>
+        <input type="text" th:field="*{deliveryRegion}"/>
+        <br/>
+
+        <label for="deliveryEntrance">Entrance: </label>
+        <input type="text" th:field="*{deliveryEntrance}"/>
+        <br/>
+
+        <label for="deliveryFloor">Floor: </label>
+        <input type="text" th:field="*{deliveryFloor}"/>
+        <br/>
+
+        <h3>How I'll pay:</h3>
+        <label for="ccNumber">Credit card number: </label>
+        <input type="text" th:field="*{ccNumber}"/>
+        <br/>
+
+        <label for="ccExpiration">Expiration: </label>
+        <input type="text" th:field="*{ccExpiration}"/>
+        <br/>
+
+        <label for="ccCVV">CVV code: </label>
+        <input type="password" th:field="*{ccCVV}"/>
+        <br/>
+
+        <input type="submit" value="Submit Order"/>
+    </form>
+</body>
+</html>
