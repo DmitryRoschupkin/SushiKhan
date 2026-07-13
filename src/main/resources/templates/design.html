@@ -11,70 +11,78 @@
     <title>SushiKhan</title>
 </head>
 <body>
-    <h1>Welcome to SushiKhan!</h1>
-    <h2>Design your sushi!</h2>
-    <form method="post" th:object="${sushi}">
-        <div class="grid">
-            <div class="ingredient-group" id = "seaweed">
-                <h3>Designate your wrap!</h3>
-                <div th:each="ingredient: ${seaweed}">
-                    <input th:field="*{ingredients}" type="checkbox"
-                    th:value="${ingredient.id}"/>
-                    <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+    <div class="design-page">
+        <h1 class="design_header-logo">Welcome to SushiKhan!</h1>
+        <h2 class="design_header-sublogo">Design your sushi!</h2>
+        <form method="post" th:object="${sushi}">
+            <div class="grid">
+                <div class="ingredient-group" id = "seaweed">
+                    <h3>Designate your wrap!</h3>
+                    <div th:each="ingredient: ${seaweed}">
+                        <input th:field="*{ingredients}" type="checkbox"
+                               th:value="${ingredient.id}"/>
+                        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                    </div>
                 </div>
-            </div>
 
-            <div class="ingredient-group" id = "bases">
-                <h3>Designate your base!</h3>
-                <div th:each="ingredient: ${base}">
-                    <input th:field="*{ingredients}" type="checkbox"
-                           th:value="${ingredient.id}"/>
-                    <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                <div class="ingredient-group" id = "bases">
+                    <h3>Designate your base!</h3>
+                    <div th:each="ingredient: ${base}">
+                        <input th:field="*{ingredients}" type="checkbox"
+                               th:value="${ingredient.id}"/>
+                        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                    </div>
                 </div>
-            </div>
 
-            <div class="ingredient-group" id = "vegetables">
-                <h3>Designate the vegetable!</h3>
-                <div th:each="ingredient: ${vegetable}">
-                    <input th:field="*{ingredients}" type="checkbox"
-                           th:value="${ingredient.id}"/>
-                    <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                <div class="ingredient-group" id = "vegetables">
+                    <h3>Designate the vegetable!</h3>
+                    <div th:each="ingredient: ${vegetable}">
+                        <input th:field="*{ingredients}" type="checkbox"
+                               th:value="${ingredient.id}"/>
+                        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                    </div>
                 </div>
-            </div>
 
-            <div class="ingredient-group" id = "cheeses">
-                <h3>Designate your cheese!</h3>
-                <div th:each="ingredient: ${cheese}">
-                    <input th:field="*{ingredients}" type="checkbox"
-                           th:value="${ingredient.id}"/>
-                    <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                <div class="ingredient-group" id = "cheeses">
+                    <h3>Designate your cheese!</h3>
+                    <div th:each="ingredient: ${cheese}">
+                        <input th:field="*{ingredients}" type="checkbox"
+                               th:value="${ingredient.id}"/>
+                        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                    </div>
                 </div>
-            </div>
 
-            <div class="ingredient-group" id = "toppings">
-                <h3>Designate your topping!</h3>
-                <div th:each="ingredient: ${topping}">
-                    <input th:field="*{ingredients}" type="checkbox"
-                           th:value="${ingredient.id}"/>
-                    <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                <div class="ingredient-group" id = "toppings">
+                    <h3>Designate your topping!</h3>
+                    <div th:each="ingredient: ${topping}">
+                        <input th:field="*{ingredients}" type="checkbox"
+                               th:value="${ingredient.id}"/>
+                        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                    </div>
                 </div>
-            </div>
 
-            <div class="ingredient-group" id = "seafood">
-                <h3>Designate your seafood!</h3>
-                <div th:each="ingredient: ${seafood}">
-                    <input th:field="*{ingredients}" type="checkbox"
-                           th:value="${ingredient.id}"/>
-                    <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                <div class="ingredient-group" id = "seafood">
+                    <h3>Designate your seafood!</h3>
+                    <div th:each="ingredient: ${seafood}">
+                        <input th:field="*{ingredients}" type="checkbox"
+                               th:value="${ingredient.id}"/>
+                        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div>
-            <h3>Name your sushi</h3>
-            <input type="text" th:field="*{name}">
-            <br/>
-            <button>Submit your sushi</button>
-        </div>
-    </form>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('ingredients')}"
+                  th:errors="*{ingredients}">
+            </span>
+            <div class="sushi-name-block">
+                <h3>Name your sushi</h3>
+                <input type="text" th:field="*{name}">
+                <span class = "validationError" th:if="${#fields.hasErrors('name')}"
+                      th:errors="*{name}">Name error</span>
+                <br/>
+                <button>Submit your sushi</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

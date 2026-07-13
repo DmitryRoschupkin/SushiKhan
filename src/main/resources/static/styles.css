@@ -1,0 +1,313 @@
+/* ===== Reset ===== */
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+body, h1, h2, h3, p, ul, form, fieldset{
+    margin: 0;
+    padding: 0;
+}
+
+ul{
+    list-style: none;
+}
+
+img{
+    max-width: 100%;
+    display: block;
+}
+
+a{
+    color: inherit;
+}
+
+input, button{
+    font: inherit;
+    color: inherit;
+}
+
+/* ===== Base ===== */
+body{
+    font-family: "ITC Avant Garde Gothic", serif;
+    color: #1a1a1a;
+    background: #fdfdfc;
+    line-height: 1.4;
+}
+
+/* ===== Home page ===== */
+.logo{
+    font-family: "ITC Avant Garde Gothic", serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    letter-spacing: 2px;
+}
+
+.logo_item{
+    font-size: 2.6rem;
+    letter-spacing: 3px;
+}
+
+.design_link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.design_link_item{
+    background: plum;
+    padding: 15px 26px;
+    border-radius: 10px;
+    border: none;
+    font-family: "ITC Avant Garde Gothic", serif;
+    font-size: 1rem;
+    color: black;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.5s ease,
+    padding-bottom 0.5s, padding-left 0.5s,
+    padding-right 0.5s, padding-top 0.5s,
+    box-shadow 0.3s ease, transform 0.15s ease;
+}
+
+.design_link_item:hover{
+    transition-duration: 0.5s;
+    background: #cd74cd;
+    padding: 17px 28px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.design_link_item:active{
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.design_link_item:focus-visible{
+    outline: 2px solid #cd74cd;
+    outline-offset: 3px;
+}
+
+/* ===== Shared form basics (design + order pages) ===== */
+input[type="text"],
+input[type="password"]{
+    font-size: 1rem;
+    padding: 10px 14px;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    outline: none;
+    background: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus{
+    border-color: plum;
+    box-shadow: 0 0 0 3px rgba(221, 160, 221, 0.28);
+}
+
+button,
+input[type="submit"]{
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.15s ease;
+}
+
+button:hover,
+input[type="submit"]:hover{
+    background: plum;
+    color: #1a1a1a;
+}
+
+button:active,
+input[type="submit"]:active{
+    transform: translateY(1px);
+}
+
+.validationError{
+    display: block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #1a1a1a;
+    border-left: 2px solid plum;
+    padding-left: 8px;
+    margin: 6px 0 12px;
+    color: darkred;
+}
+
+/* ===== Design page ===== */
+.design-page{
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+}
+
+.design-page h1{
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.design-page h2{
+    font-size: 1.05rem;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    color: #555;
+    margin-bottom: 36px;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 36px;
+}
+
+.ingredient-group{
+    background: #fff;
+    border: 1px solid #ecdcec;
+    border-radius: 12px;
+    padding: 18px 20px 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ingredient-group:hover{
+    border-color: plum;
+    box-shadow: 0 4px 14px rgba(221, 160, 221, 0.15);
+}
+
+.ingredient-group h3{
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.ingredient-group div{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+}
+
+.ingredient-group input[type="checkbox"]{
+    accent-color: plum;
+    width: 16px;
+    height: 16px;
+}
+
+.ingredient-group span{
+    font-size: 0.92rem;
+}
+
+.sushi-name-block{
+    border-top: 1px solid #eee;
+    padding-top: 28px;
+}
+
+.sushi-name-block h3{
+    font-size: 1rem;
+    letter-spacing: 0.4px;
+    margin-bottom: 14px;
+}
+
+.sushi-name-block input[type="text"]{
+    width: 260px;
+    max-width: 100%;
+    margin-right: 12px;
+}
+
+.sushi-name-block button{
+    margin-top: 18px;
+}
+
+/* ===== Order page ===== */
+.order-page{
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+}
+
+.order-page h1{
+    font-size: 1.9rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 18px;
+}
+
+.order-page h3{
+    font-size: 1.05rem;
+    letter-spacing: 0.4px;
+    border-left: 3px solid plum;
+    padding-left: 10px;
+    margin: 28px 0 14px;
+}
+
+#another{
+    display: inline-block;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-bottom: 8px;
+}
+
+.order-page ul{
+    margin-bottom: 8px;
+}
+
+.order-page li{
+    padding: 7px 2px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+}
+
+.order-page img{
+    border-radius: 8px;
+    margin: 4px 0 20px;
+    max-width: 260px;
+}
+
+.field{
+    margin-bottom: 14px;
+}
+
+.field label{
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 0.3px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.field input[type="text"],
+.field input[type="password"]{
+    width: 100%;
+}
+
+.order-page input[type="submit"]{
+    margin-top: 12px;
+}
+
+@font-face {
+    font-family: "Futura LT";
+    src: url("fonts/futuralt_bold.ttf") format("trueType");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "ITC Avant Garde Gothic";
+    src: url("fonts/avantgarde_demi.ttf") format("trueType");
+    font-style: normal;
+    font-weight: normal;
+}

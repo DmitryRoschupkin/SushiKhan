@@ -4,8 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.extern.slf4j.Slf4j;
@@ -105,7 +107,12 @@ public class DesignSushiController {
     }
 
     @PostMapping
-    public String processSushi(Sushi sushi, @ModelAttribute SushiOrder sushiOrder){
+    public String processSushi(
+            @Valid Sushi sushi, Errors errors,
+            @ModelAttribute SushiOrder sushiOrder){
+        if(errors.hasErrors()){
+            return "design";
+        }
         sushiOrder.addSushi(sushi);
         //log.info("New sushi order: {}", sushiOrder);
         return "redirect:/orders/current";
