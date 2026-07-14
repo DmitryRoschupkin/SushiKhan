@@ -3,6 +3,7 @@ package me.dmitriy.sushikhan;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import org.jspecify.annotations.Nullable;
 
 @Data
 public class Ingredient{

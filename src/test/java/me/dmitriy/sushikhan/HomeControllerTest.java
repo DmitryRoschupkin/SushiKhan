@@ -1,5 +1,6 @@
 package me.dmitriy.sushikhan;
 
+import me.dmitriy.sushikhan.web.WebConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
@@ -12,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 
-@WebMvcTest(HomeController.class)
+@WebMvcTest(WebConfig.class)
 public class HomeControllerTest {
     @Autowired
     private MockMvc mockMvc;

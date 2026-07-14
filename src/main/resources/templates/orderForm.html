@@ -66,6 +66,12 @@
                   th:errors="*{deliveryFloor}">Floor Error</span>
             <br/>
 
+            <label for="deliveryFlat">Flat: </label>
+            <input type="text" th:field="*{deliveryFlat}"/>
+            <span class = "validationError" th:if="${#fields.hasErrors('deliveryFlat')}"
+                  th:errors="*{deliveryFlat}">Flat Error</span>
+            <br/>
+
             <h3>How I'll pay:</h3>
             <label for="ccNumber">Credit card number: </label>
             <input type="text" th:field="*{ccNumber}"/>
