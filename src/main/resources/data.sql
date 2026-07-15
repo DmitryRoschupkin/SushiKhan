@@ -51,4 +51,5 @@ INSERT INTO ingredient (ingredient_id, name, type) VALUES
 ('WSBI', 'Wasabi', 'SEASONING'),
 ('GING', 'Pickled Ginger', 'SEASONING'),
 ('PEPR', 'Black Pepper', 'SEASONING'),
-('SALT', 'Sea Salt', 'SEASONING');
+('SALT', 'Sea Salt', 'SEASONING')
+ON CONFLICT (ingredient_id) DO NOTHING;

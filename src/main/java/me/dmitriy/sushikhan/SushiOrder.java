@@ -1,5 +1,6 @@
 package me.dmitriy.sushikhan;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -12,11 +13,21 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+@Entity
+@Table(name = "sushi_order")
 public class SushiOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Column(name = "sushi_order_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date placedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        placedAt = new Date();
+    }
 
     @NotBlank(message = "Required!")
     private String deliveryName;
@@ -50,8 +61,11 @@ public class SushiOrder implements Serializable {
     private String ccExpiration;
 
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
+    @Column(name = "cc_cvv")
     private String ccCVV;
 
+    @OneToMany(cascade =  CascadeType.ALL, mappedBy = "sushiOrder")
+    @OrderBy("id ASC")
     private List<Sushi> sushiList = new ArrayList<>();
 
     public List<Sushi> getSushiList() {
@@ -152,5 +166,6 @@ public class SushiOrder implements Serializable {
 
     public void addSushi(Sushi sushi) {
         this.sushiList.add(sushi);
+        sushi.setSushiOrder(this);
     }
 }

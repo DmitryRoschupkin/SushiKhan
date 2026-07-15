@@ -2,6 +2,7 @@ package me.dmitriy.sushikhan.web;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import me.dmitriy.sushikhan.Sushi;
 import me.dmitriy.sushikhan.SushiOrder;
 import me.dmitriy.sushikhan.data.OrderRepository;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,11 @@ public class OrderController {
         errors.getAllErrors().forEach(System.out::println);
         if(errors.hasErrors()) {
             return "orderForm";
+        }
+        if(order.getSushiList() != null){
+            for(Sushi sushi : order.getSushiList()){
+                sushi.setSushiOrder(order);
+            }
         }
         orderRepo.save(order);
         sessionStatus.setComplete();

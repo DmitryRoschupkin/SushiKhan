@@ -1,5 +1,6 @@
 package me.dmitriy.sushikhan;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -9,6 +10,8 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+@Entity
+@Table(name = "sushi")
 public class Sushi {
 
     @NotBlank
@@ -17,10 +20,26 @@ public class Sushi {
 
     @NotNull
     @Size(min = 1, message = "You have to choose at least 1 ingredient!")
+    @ManyToMany()
+    @JoinTable(
+            name = "ingredient_ref",
+            joinColumns = @JoinColumn(name = "sushi_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+    )
     private List<Ingredient> ingredients;
 
+    @Column(name = "sushi_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date createdAt = new Date();
+
+    @ManyToOne
+    @JoinColumn(name = "sushi_order_id", nullable = false)
+    private SushiOrder sushiOrder;
+
+//    @Column(name = "sushi_order_key",  insertable = false, updatable = false)
+//    private Integer sushiOrderKey;
 
     public Long getId() {
         return id;
