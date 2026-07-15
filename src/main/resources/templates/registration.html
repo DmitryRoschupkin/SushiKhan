@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SushiKhan</title>
+</head>
+<body>
+    <div class="logo">
+        <h1 class="logo_item">SushiKhan</h1>
+        <h2 class="logo_item">Registration</h2>
+    </div>
+    <form method="post" th:action="@{/register}" id="registerForm">
+        <label for="username">Username: </label>
+        <input type="text" name="username" /><br/>
+
+        <label for="password">Password: </label>
+        <input type="password" name="password" /><br/>
+
+        <label for="confirm">Confirm password: </label>
+        <input type="password" name="confirm" /><br/>
+
+        <label for="fullname">Full name: </label>
+        <input type="text" name="fullname" /><br/>
+
+        <label for="street">Street: </label>
+        <input type="text" name="street" /><br/>
+
+        <label for="city">City/Village: </label>
+        <input type="text" name="city" /><br/>
+
+        <label for="region">Region: </label>
+        <input type="text" name="region" /><br/>
+
+        <label for="phone">Phone: </label>
+        <input type="text" name="phone" /><br/>
+
+        <input type="submit" value="Register!">
+    </form>
+</body>
+</html>

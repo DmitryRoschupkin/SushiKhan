@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LoginKhan</title>
+</head>
+<body>
+    <div class="logo">
+      <h1 class="logo_item">SushiKhan</h1>
+      <h2 class="logo_item">Login</h2>
+    </div>
+
+    <div class="login_content">
+      <div class="login_content_img"></div>
+      <div class="login_content_form">
+        <div th:if="${error}">
+          Unable to login. Check your name and password.
+        </div>
+        <p class="login_content_form_text">New here? Click
+          <a th:href="@{/register}" class="login_content_from_link"> here to register.</a>
+        </p>
+        <form method="post" th:action="@{/login}" id="loginForm">
+          <label for="username">Username: </label>
+          <input type="text" name="username" id="username" /><br/>
+
+          <label for="password">Password: </label>
+          <input type="password" name="password" id="password"/><br/>
+
+          <input type="submit" value="Login"/>
+        </form>
+      </div>
+    </div>
+</body>
+</html>

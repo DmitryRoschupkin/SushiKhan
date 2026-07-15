@@ -14,7 +14,7 @@
     <div class="design-page">
         <h1 class="design_header-logo">Welcome to SushiKhan!</h1>
         <h2 class="design_header-sublogo">Design your sushi!</h2>
-        <form method="post" th:object="${sushi}">
+        <form method="post" th:action="@{/design}" th:object="${sushi}">
             <div class="grid">
                 <div class="ingredient-group" id = "seaweed">
                     <h3>Designate your wrap!</h3>
