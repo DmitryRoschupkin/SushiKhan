@@ -1,10 +1,12 @@
 package me.dmitriy.sushikhan;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.Date;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "sushi")
+@RestResource(rel = "sushilist", path = "sushilist")
 public class Sushi {
 
     @NotBlank
@@ -36,6 +39,7 @@ public class Sushi {
 
     @ManyToOne
     @JoinColumn(name = "sushi_order_id", nullable = false)
+    @JsonIgnore
     private SushiOrder sushiOrder;
 
 
