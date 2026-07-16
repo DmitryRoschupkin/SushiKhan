@@ -68,6 +68,17 @@ public class SushiOrder implements Serializable {
     @OrderBy("id ASC")
     private List<Sushi> sushiList = new ArrayList<>();
 
+    @ManyToOne
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public List<Sushi> getSushiList() {
         return sushiList;
     }
