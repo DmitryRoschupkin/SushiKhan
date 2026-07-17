@@ -4,6 +4,7 @@ import me.dmitriy.sushikhan.User;
 import me.dmitriy.sushikhan.data.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -51,6 +52,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/design", "/orders").hasRole("USER")
                         .requestMatchers("/", "/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/ingredients")
+                        .hasAuthority("SCOPE_writeIngredients")
+                        .requestMatchers(HttpMethod.DELETE, "/api/ingredients")
+                        .hasAuthority("SCOPE_deleteIngredients")
                         .anyRequest().authenticated()
                 ).formLogin(form -> form
                         .loginPage("/login")
@@ -58,7 +63,10 @@ public class SecurityConfig {
                 ).oauth2Login(oauth2 -> oauth2
                         .loginPage("/login")
                         .userInfoEndpoint(userInfo -> userInfo
-                                .userService(this.oAuth2UserService())));
+                                .userService(this.oAuth2UserService()
+                                )
+                        )
+                ).oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
         return http.build();
     }
 
@@ -75,5 +83,19 @@ public class SecurityConfig {
             }
             return user;
         };
+    }
+
+    @Bean
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
+            throws Exception {
+
+        http
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().authenticated()
+                ).oauth2Login(
+                        oauth2 -> oauth2
+                        .loginPage("/oauth2/authorization/sushi-admin-client")
+                ).oauth2Client(Customizer.withDefaults());
+        return http.build();
     }
 }
