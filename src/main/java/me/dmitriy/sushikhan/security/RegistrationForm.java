@@ -12,11 +12,14 @@ public class RegistrationForm {
     private String city;
     private String region;
     private String phone;
+    private String role;
+
+
 
     public User toUser(PasswordEncoder encoder) {
         return new User(
             username, encoder.encode(password),
-            fullname, street, city, region, phone
+            fullname, street, city, region, phone, role
         );
     }
 
@@ -74,5 +77,13 @@ public class RegistrationForm {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -9,7 +9,9 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -29,9 +31,10 @@ public class User implements UserDetails, OAuth2User {
     private String city;
     private String region;
     private String phone;
+    private String role;
 
 
-    public User(String username, String password, String fullname, String street, String city, String region, String phone) {
+    public User(String username, String password, String fullname, String street, String city, String region, String phone, String role) {
 
         this.username = username;
         this.password = password;
@@ -40,6 +43,7 @@ public class User implements UserDetails, OAuth2User {
         this.city = city;
         this.region = region;
         this.phone = phone;
+        this.role = role;
     }
 
     public User() {
@@ -49,7 +53,7 @@ public class User implements UserDetails, OAuth2User {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority(this.role));
     }
 
     @Override
@@ -146,5 +150,13 @@ public class User implements UserDetails, OAuth2User {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

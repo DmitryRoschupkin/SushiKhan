@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,13 +23,19 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     private final UserRepository userRepo;
+    private final CustomOAuth2UserService customOAuth2UserService;
 
-    public SecurityConfig(UserRepository userRepo) {
+
+    public SecurityConfig(UserRepository userRepo, CustomOAuth2UserService customOAuth2UserService) {
         this.userRepo = userRepo;
+        this.customOAuth2UserService = customOAuth2UserService;
     }
+
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -55,7 +62,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/api/ingredients")
                         .hasAuthority("SCOPE_writeIngredients")
-                        .requestMatchers(HttpMethod.DELETE, "/api/ingredients")
+                        .requestMatchers(HttpMethod.PUT, "/api/ingredients/**")
+                        .hasAuthority("SCOPE_writeIngredients")
+                        .requestMatchers(HttpMethod.DELETE, "/api/ingredients/**")
                         .hasAuthority("SCOPE_deleteIngredients")
                         .anyRequest().authenticated()
                 ).oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
@@ -68,17 +77,21 @@ public class SecurityConfig {
             throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-
-                        .requestMatchers("/design", "/orders", "/ingredients").hasRole("USER")
+                        .requestMatchers("/ingredients/admin").hasRole("ADMIN")
+                        .requestMatchers("/design", "/orders", "/ingredients").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/", "/login", "/error", "/css/**", "/js/**", "/images/**").permitAll()
                         .anyRequest().authenticated()
-                ).formLogin(form -> form
+                ).oauth2Login(oauth2 -> oauth2
+                        .loginPage("/login")
+                        .userInfoEndpoint(userInfo -> userInfo
+                                .userService(customOAuth2UserService)
+                        )
+                        .defaultSuccessUrl("/", true))
+                .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/", true)
                         .permitAll()
-                ).oauth2Login(oauth2 -> oauth2
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/", true));
+                );
         return http.build();
     }
 
