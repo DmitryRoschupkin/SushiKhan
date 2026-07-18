@@ -14,6 +14,7 @@
     <div class="design-page">
         <h1 class="design_header-logo">Welcome to SushiKhan!</h1>
         <h2 class="design_header-sublogo">Design your sushi!</h2>
+        <a th:href="@{/ingredients}" id="edit_ingredients">Edit ingredients!</a>
         <form method="post" th:action="@{/design}" th:object="${sushi}">
             <div class="grid">
                 <div class="ingredient-group" id = "seaweed">

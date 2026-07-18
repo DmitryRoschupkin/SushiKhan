@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SushiKhan</title>
+    <link rel="stylesheet" th:href="@{styles.css}">
+</head>
+<body>
+    <div class="logo">
+        <h1 class="logo_item">SushiKhan</h1>
+        <h2 class="logo_item">Add new ingredient</h2>
+    </div>
+    <div class="form-group">
+        <label for="id">ID (Four capital letters): </label>
+        <input type="text" id="id" placeholder="MANG">
+    </div>
+    <div class="form-group">
+        <label for="name">Name1: </label>
+        <input type="text" id="name" placeholder="Mango">
+    </div>
+    <div class="form-group">
+        <label for="type">Type:</label>
+        <select id="type">
+            <option th:each="type: ${types}"
+                    th:value="${type}"
+                    th:text="${type}">
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="hidden" id="token" th:value="${accessToken}">
+    </div>
+    <button type="button" onclick="sendIngredient()">Save ingredient!</button>
+    <div id="message"></div>
+
+    <script>
+        async function sendIngredient() {
+            const id = document.getElementById('id').value;
+            const name = document.getElementById('name').value;
+            const type = document.getElementById('type').value;
+            const token = document.getElementById('token').value;
+            const messageDiv = document.getElementById('message');
+
+            const payload = { id, name, type }
+
+            try{
+                const response = await fetch('api/ingredients',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': ['application/json'],
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+                if(response.ok) {
+                    messageDiv.style.color = 'green';
+                    messageDiv.innerText = `Ingredient ${name} has been added successfully!`;
+                    window.location.href = '/design';
+                }else{
+                    const errorData = await responce.text();
+                    messageDiv.style.color = 'dark-red';
+                    messageDiv.innerText = `Error: (${response.status}): ${errorData}`
+                }
+            }catch (error){
+                messageDiv.style.color = 'dark-red';
+                messageDiv.innerText = 'Network error: '+error.message;
+            }
+        }
+    </script>
+</body>
+</html>

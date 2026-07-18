@@ -4,6 +4,7 @@ import me.dmitriy.sushikhan.User;
 import me.dmitriy.sushikhan.data.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -46,27 +47,38 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http)
-            throws Exception {
+    @Order(1)
+    public SecurityFilterChain apiSecurityFilterChain(HttpSecurity http) throws Exception {
         http
+                .securityMatcher("/api/**")
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/design", "/orders").hasRole("USER")
-                        .requestMatchers("/", "/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/ingredients")
                         .hasAuthority("SCOPE_writeIngredients")
                         .requestMatchers(HttpMethod.DELETE, "/api/ingredients")
                         .hasAuthority("SCOPE_deleteIngredients")
                         .anyRequest().authenticated()
+                ).oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
+        return http.build();
+    }
+
+    @Bean
+    @Order(2)
+    public SecurityFilterChain uiFilterChain(HttpSecurity http)
+            throws Exception {
+        http
+                .authorizeHttpRequests(auth -> auth
+
+                        .requestMatchers("/design", "/orders", "/ingredients").hasRole("USER")
+                        .requestMatchers("/", "/login", "/error", "/css/**", "/js/**", "/images/**").permitAll()
+                        .anyRequest().authenticated()
                 ).formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/").permitAll()
+                        .defaultSuccessUrl("/", true)
+                        .permitAll()
                 ).oauth2Login(oauth2 -> oauth2
                         .loginPage("/login")
-                        .userInfoEndpoint(userInfo -> userInfo
-                                .userService(this.oAuth2UserService()
-                                )
-                        )
-                ).oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
+                        .defaultSuccessUrl("/", true));
         return http.build();
     }
 
@@ -75,7 +87,17 @@ public class SecurityConfig {
         DefaultOAuth2UserService delegate = new DefaultOAuth2UserService();
         return userRequest -> {
             OAuth2User oAuth2User = delegate.loadUser(userRequest);
-            String username = oAuth2User.getAttributes().get("username").toString();
+
+            Object usernameAttr = oAuth2User.getAttributes().get("username");
+            if (usernameAttr == null) {
+                usernameAttr = oAuth2User.getAttributes().get("sub");
+            }
+
+            if (usernameAttr == null) {
+                throw new UsernameNotFoundException("Principal attributes missing username or sub field");
+            }
+
+            String username = usernameAttr.toString();
             User user = userRepo.findByUsername(username);
             if(user == null) {
                 throw new UsernameNotFoundException(
