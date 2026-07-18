@@ -84,18 +84,4 @@ public class SecurityConfig {
             return user;
         };
     }
-
-    @Bean
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
-            throws Exception {
-
-        http
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().authenticated()
-                ).oauth2Login(
-                        oauth2 -> oauth2
-                        .loginPage("/oauth2/authorization/sushi-admin-client")
-                ).oauth2Client(Customizer.withDefaults());
-        return http.build();
-    }
 }

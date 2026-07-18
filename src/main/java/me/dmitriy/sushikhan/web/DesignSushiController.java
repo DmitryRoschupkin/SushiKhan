@@ -64,7 +64,6 @@ public class DesignSushiController {
             return "design";
         }
         sushiOrder.addSushi(sushi);
-        //log.info("New sushi order: {}", sushiOrder);
         return "redirect:/orders/current";
     }
 
