@@ -22,7 +22,7 @@ public class FileWriterIntegrationConfig {
                 .from(MessageChannels.direct("textInChannel"))
                 .<String, String>transform(String::toUpperCase)
                 .handle(Files
-                        .outboundAdapter(new File("/files"))
+                        .outboundAdapter(new File("files"))
                         .fileExistsMode(FileExistsMode.APPEND)
                         .appendNewLine(true))
                 .get();

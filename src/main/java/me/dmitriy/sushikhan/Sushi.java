@@ -42,6 +42,13 @@ public class Sushi {
     @JsonIgnore
     private SushiOrder sushiOrder;
 
+    public Sushi(String sushiName) {
+        this.name = sushiName;
+    }
+
+    public Sushi() {
+    }
+
 
     public Long getId() {
         return id;
