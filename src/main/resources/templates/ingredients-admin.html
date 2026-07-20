@@ -10,65 +10,77 @@
 
 <div id="security-context" th:data-token="${accessToken}" style="display: none;"></div>
 
-<header>
-    <h1>Ingredients Administration Panel</h1>
-    <a th:href="@{/ingredients}" class="btn">View Public Page</a>
-</header>
+<div class="admin-page">
+    <header>
+        <h1>Ingredients Administration Panel</h1>
+        <a th:href="@{/ingredients}" class="btn">View Public Page</a>
+    </header>
 
-<main>
-    <section class="form-section">
-        <h2 id="form-title">Create New Ingredient</h2>
-        <form id="ingredientForm">
-            <div class="form-group">
-                <label for="ingId">Ingredient Code (ID):</label>
-                <input type="text" id="ingId" required placeholder="e.g., SLMN" />
-            </div>
-            <div class="form-group">
-                <label for="ingName">Name:</label>
-                <input type="text" id="ingName" required placeholder="e.g., Salmon" />
-            </div>
-            <div class="form-group">
-                <label for="ingType">Type:</label>
-                <select id="ingType">
-                    <option th:each="type : ${types}"
-                            th:value="${type}"
-                            th:text="${type.name()}">Type Name</option>
-                </select>
-            </div>
-            <button type="button" id="btnSave">Save</button>
-            <button type="button" id="btnCancel" style="display: none;">Cancel Edit</button>
-        </form>
-    </section>
+    <main>
+        <section class="form-section">
+            <h2 id="form-title">Create New Ingredient</h2>
+            <form id="ingredientForm">
+                <div class="form-group">
+                    <label for="ingId">Ingredient Code (ID):</label>
+                    <input type="text" id="ingId" required placeholder="e.g., SLMN"/>
+                </div>
+                <div class="form-group">
+                    <label for="ingName">Name:</label>
+                    <input type="text" id="ingName" required placeholder="e.g., Salmon"/>
+                </div>
+                <div class="form-group">
+                    <label for="ingType">Type:</label>
+                    <select id="ingType">
+                        <option th:each="type : ${types}"
+                                th:value="${type}"
+                                th:text="${type.name()}">Type Name
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ingPicture">Picture Path/URL:</label>
+                    <input type="text" id="ingPicture" placeholder="e.g., /images/ingredients/salmon.png"/>
+                    <p style="margin-top: 15px; color: #af8181; font-style: italic">
+                        *I will make possible loading of pictures from your device soon*
+                    </p>
+                </div>
+                <button type="button" id="btnSave">Save</button>
+                <button type="button" id="btnCancel" style="display: none;">Cancel Edit</button>
+            </form>
+        </section>
 
-    <section class="list-section">
-        <h2>Current Database Entries</h2>
-        <table border="1">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="ingredient : ${ingredients}">
-                <td th:text="${ingredient.id}">ID</td>
-                <td th:text="${ingredient.name}">Name</td>
-                <td th:text="${ingredient.type}">Type</td>
-                <td>
-                    <button type="button" class="btn-edit"
-                            th:data-id="${ingredient.id}"
-                            th:data-name="${ingredient.name}"
-                            th:data-type="${ingredient.type}">Edit</button>
-                    <button type="button" class="btn-delete"
-                            th:data-id="${ingredient.id}">Delete</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </section>
-</main>
+        <section class="list-section">
+            <h2>Current Database Entries</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ingredient : ${ingredients}">
+                    <td th:text="${ingredient.id}">ID</td>
+                    <td th:text="${ingredient.name}">Name</td>
+                    <td th:text="${ingredient.type}">Type</td>
+                    <td>
+                        <button type="button" class="btn-edit"
+                                th:data-id="${ingredient.id}"
+                                th:data-name="${ingredient.name}"
+                                th:data-type="${ingredient.type}">Edit
+                        </button>
+                        <button type="button" class="btn-delete"
+                                th:data-id="${ingredient.id}">Delete
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</div>
 
 <script th:src="@{/js/ingredients-admin.js}"></script>
 </body>

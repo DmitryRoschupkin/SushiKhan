@@ -9,6 +9,7 @@ import java.util.Objects;
 @Data
 @Entity
 @Table(name = "ingredient")
+@NoArgsConstructor
 public class Ingredient{
     @Id
     @Column(name = "ingredient_id")
@@ -16,17 +17,23 @@ public class Ingredient{
     private String name;
     @Enumerated(EnumType.STRING)
     private Type type;
+    private String picture;
 
-
-    public Ingredient(String id, String name, Type type) {
+    public Ingredient(String id, String name, Type type, String picture) {
         this.id = id;
         this.name = name;
         this.type = type;
+        this.picture = picture;
     }
 
-    public Ingredient() {
+    public Ingredient(String picture) {
 
+        this.picture = picture;
     }
+
+    public Ingredient(String id, String s, Type type) {
+    }
+
 
     public Type getType() {
         return type;

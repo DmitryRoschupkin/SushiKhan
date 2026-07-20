@@ -6,12 +6,13 @@ import me.dmitriy.sushikhan.data.IngredientRepository;
 import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 @RequestMapping("/ingredients")
@@ -33,7 +34,7 @@ public class IngredientViewController {
         return "ingredients-list";
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/admin/edit")
     public String adminPanel(Model model) {
         model.addAttribute("ingredients", ingredientRepository.findAll());
         model.addAttribute("accessToken", getSystemToken());

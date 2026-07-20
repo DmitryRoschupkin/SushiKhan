@@ -13,16 +13,16 @@
       <h2 class="logo_item">Login</h2>
     </div>
 
-    <div class="login_content">
-      <div class="login_content_img"></div>
-      <div class="login_content_form">
-        <div th:if="${error}">
+    <div class="login__panel">
+      <div class="login__image"></div>
+      <div class="login__form-wrap">
+        <div th:if="${error}" class="login__error">
           Unable to login. Check your name and password.
         </div>
-        <p class="login_content_form_text">New here? Click
-          <a th:href="@{/register}" class="login_content_from_link"> here to register.</a>
+        <p class="login__hint">New here? Click
+          <a th:href="@{/register}" class="login__link"> here to register.</a>
         </p>
-        <form method="post" th:action="@{/login}" id="loginForm">
+        <form method="post" th:action="@{/login}" id="loginForm" class="login__form">
           <label for="username">Username: </label>
           <input type="text" name="username" id="username" /><br/>
 

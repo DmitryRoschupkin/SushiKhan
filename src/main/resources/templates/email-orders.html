@@ -9,22 +9,24 @@
 </head>
 <body>
     <div class="logo">
-      <h1 class="logo_item">SushiKhan</h1>
+      <a th:href="/" class="logo_item">SushiKhan</a>
     </div>
-    <div th:if="${#lists.isEmpty(orders)}" class="empty-state">
-      There is no new orders from email...
-    </div>
-    <div th:each="order : ${orders}" class="order-card">
-      <div class="customer">
-        Sender: <span th:text="${order.user != null ? order.user.username : 'Anonym'}">user@example.com</span>
+    <div class="email-page">
+      <div th:if="${#lists.isEmpty(orders)}" class="empty-state">
+        There is no new orders from email...
       </div>
-      <div>
-        <strong>Order:</strong>
-        <ul class="sushi-list">
-          <li th:each="sushi : ${order.sushiList}" class="sushi-item">
-            <span th:text="${sushi.name}">Philadelphia</span>
-          </li>
-        </ul>
+      <div th:each="order : ${orders}" class="order-card">
+        <div class="customer">
+          Sender: <span th:text="${order.user != null ? order.user.username : 'Anonym'}">user@example.com</span>
+        </div>
+        <div>
+          <strong>Order:</strong>
+          <ul class="sushi-list">
+            <li th:each="sushi : ${order.sushiList}" class="sushi-item">
+              <span th:text="${sushi.name}">Philadelphia</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 </body>

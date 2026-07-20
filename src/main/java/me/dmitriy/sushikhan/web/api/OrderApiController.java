@@ -1,10 +1,13 @@
 package me.dmitriy.sushikhan.web.api;
 
 import jakarta.jms.JMSException;
+import me.dmitriy.sushikhan.Ingredient;
 import me.dmitriy.sushikhan.SushiOrder;
 import me.dmitriy.sushikhan.data.OrderRepository;
 import me.dmitriy.sushikhan.messaging.OrderMessagingService;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

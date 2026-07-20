@@ -2,9 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = document.getElementById('security-context').getAttribute('data-token');
 
     const formTitle = document.getElementById('form-title');
+    const formSection = document.querySelector('.form-section');
+
     const inputId = document.getElementById('ingId');
     const inputName = document.getElementById('ingName');
     const selectType = document.getElementById('ingType');
+    const inputPicture = document.getElementById('ingPicture');
 
     const btnSave = document.getElementById('btnSave');
     const btnCancel = document.getElementById('btnCancel');
@@ -20,7 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const payload = {
             id: inputId.value.trim(),
             name: inputName.value.trim(),
-            type: selectType.value
+            type: selectType.value,
+            picture: inputPicture.value.trim()
         };
 
         if (!payload.id || !payload.name) {
@@ -55,8 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
             inputId.disabled = true;
             inputName.value = e.target.getAttribute('data-name');
             selectType.value = e.target.getAttribute('data-type');
+            inputPicture.value = e.target.getAttribute('data-picture') || '';
 
             btnCancel.style.display = 'inline-block';
+
+            formTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            formSection.classList.remove('form-section--highlight');
+            void formSection.offsetWidth;
+            formSection.classList.add('form-section--highlight');
         }
 
         if (e.target.classList.contains('btn-delete')) {
@@ -84,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         inputId.value = '';
         inputId.disabled = false;
         inputName.value = '';
+        inputPicture.value = '';
         selectType.selectedIndex = 0;
         btnCancel.style.display = 'none';
     });

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>SushiKhan | Dashboard</title>
+  <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+
+<h1>SushiKhan control dashboard</h1>
+
+<div class="grid">
+  <div class="card">
+    <h2>Find ingredient by ID</h2>
+    <div style="display: flex; gap: 8px;">
+      <input type="text" id="ingIdInput" placeholder="e.g: AVOC, CHEE, FLUR">
+      <button onclick="fetchIngredientById()">Find!</button>
+    </div>
+    <div id="ingResult">
+      <p >Enter the ingredient ID above</p>
+    </div>
+  </div>
+
+  <a href="/ingredients/admin/edit">Admin panel: edit</a>
+
+  <div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h2>Recent Sushi</h2>
+      <button onclick="loadRecentSushi()">Refresh</button>
+    </div>
+    <div id="recentSushiContainer"></div>
+  </div>
+</div>
+
+<script th:src="@{/js/sushi-dashboard.js}"></script>
+</body>
+</html>
