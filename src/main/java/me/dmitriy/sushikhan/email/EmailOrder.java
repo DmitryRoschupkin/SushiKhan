@@ -6,19 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmailOrder {
-    private final String emal;
+    private final String email;
     private List<Sushi> sushiList = new ArrayList<>();
 
     public EmailOrder(String email) {
-        this.emal = email;
+        this.email = email;
     }
 
     public void addSushi(Sushi sushi) {
         sushiList.add(sushi);
     }
 
-    public String getEmal() {
-        return emal;
+    public String getEmail() {
+        return email;
     }
 
     public List<Sushi> getSushiList() {
