@@ -2,7 +2,7 @@ async function openIngredientModal(id) {
     const modal = document.getElementById('ingredientModal');
     const modalBody = document.getElementById('modalBody');
 
-    modal.style.display = 'flex';
+    modal.classList.add('is-open');
     modalBody.innerHTML = '<p>Loading details...</p>';
 
     try {
@@ -32,7 +32,7 @@ async function openIngredientModal(id) {
 }
 
 function closeIngredientModal() {
-    document.getElementById('ingredientModal').style.display = 'none';
+    document.getElementById('ingredientModal').classList.remove('is-open');
 }
 
 window.addEventListener('click', (event) => {

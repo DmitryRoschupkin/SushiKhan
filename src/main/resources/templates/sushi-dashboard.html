@@ -9,26 +9,30 @@
 
 <h1>SushiKhan control dashboard</h1>
 
-<div class="grid">
-  <div class="card">
-    <h2>Find ingredient by ID</h2>
-    <div style="display: flex; gap: 8px;">
-      <input type="text" id="ingIdInput" placeholder="e.g: AVOC, CHEE, FLUR">
-      <button onclick="fetchIngredientById()">Find!</button>
-    </div>
-    <div id="ingResult">
-      <p >Enter the ingredient ID above</p>
-    </div>
+<div class="dashboard-page">
+
+  <div class="dashboard-page__toolbar">
+    <a href="/ingredients/admin/edit" class="btn">Admin panel: edit</a>
   </div>
 
-  <a href="/ingredients/admin/edit">Admin panel: edit</a>
-
-  <div class="card">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <h2>Recent Sushi</h2>
-      <button onclick="loadRecentSushi()">Refresh</button>
+  <div class="grid">
+    <div class="card">
+      <h2>Find ingredient by ID</h2>
+      <div class="card__row">
+        <input type="text" id="ingIdInput" placeholder="e.g: AVOC, CHEE, FLUR">
+        <button onclick="fetchIngredientById()">Find!</button>
+      </div>
+      <div id="ingResult">
+        <p class="card__hint">Enter the ingredient ID above</p>
+      </div>
     </div>
-    <div id="recentSushiContainer"></div>
+    <div class="card">
+      <div class="card__header-row">
+        <h2>Recent Sushi</h2>
+        <button onclick="loadRecentSushi()">Refresh</button>
+      </div>
+      <div id="recentSushiContainer"></div>
+    </div>
   </div>
 </div>
 
