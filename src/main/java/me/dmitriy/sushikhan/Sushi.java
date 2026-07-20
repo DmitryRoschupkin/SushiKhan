@@ -29,6 +29,7 @@ public class Sushi {
             joinColumns = @JoinColumn(name = "sushi_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
+
     private List<Ingredient> ingredients;
 
     @Column(name = "sushi_id")
