@@ -5,9 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <title>SushiKhanCalculator</title>
+    <link rel="stylesheet" th:href="@{styles.css}">
 </head>
 <body>
     <h1>SushiKhan Calculator!</h1>
     <p th:text="${result}"/>
+    <footer class="footer">
+        <div class="footer__content">
+            <span class="footer__content-logo">SushiKhan</span>
+            <p class="footer__content-text">&copy; Dmitriy Rochshupkin 2026</p>
+        </div>
+    </footer>
 </body>
 </html>

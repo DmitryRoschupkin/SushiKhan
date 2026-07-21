@@ -11,29 +11,40 @@
 
 <div class="dashboard-page">
 
-  <div class="dashboard-page__toolbar">
-    <a href="/ingredients/admin/edit" class="btn">Admin panel: edit</a>
-  </div>
+  <main class="dashboard-page-main">
+    <div class="dashboard-page__toolbar">
+      <a style="margin-right: 10px" href="/admin/email-orders" class="btn">Orders from Email</a>
+      <a href="/ingredients/admin/edit" class="btn">Admin panel: edit</a>
 
-  <div class="grid">
-    <div class="card">
-      <h2>Find ingredient by ID</h2>
-      <div class="card__row">
-        <input type="text" id="ingIdInput" placeholder="e.g: AVOC, CHEE, FLUR">
-        <button onclick="fetchIngredientById()">Find!</button>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Find ingredient by ID</h2>
+        <div class="card__row">
+          <input type="text" id="ingIdInput" placeholder="e.g: AVOC, CHEE, FLUR">
+          <button onclick="fetchIngredientById()">Find!</button>
+        </div>
+        <div id="ingResult">
+          <p class="card__hint">Enter the ingredient ID above</p>
+        </div>
       </div>
-      <div id="ingResult">
-        <p class="card__hint">Enter the ingredient ID above</p>
+      <div class="card">
+        <div class="card__header-row">
+          <h2>Recent Sushi</h2>
+          <button onclick="loadRecentSushi()">Refresh</button>
+        </div>
+        <div id="recentSushiContainer"></div>
       </div>
     </div>
-    <div class="card">
-      <div class="card__header-row">
-        <h2>Recent Sushi</h2>
-        <button onclick="loadRecentSushi()">Refresh</button>
-      </div>
-      <div id="recentSushiContainer"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__content">
+      <span class="footer__content-logo">SushiKhan</span>
+      <p class="footer__content-text">&copy; Dmitriy Rochshupkin 2026</p>
     </div>
-  </div>
+  </footer>
 </div>
 
 <script th:src="@{/js/sushi-dashboard.js}"></script>

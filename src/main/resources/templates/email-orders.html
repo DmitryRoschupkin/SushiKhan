@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="logo">
-      <a th:href="/" class="logo_item">SushiKhan</a>
+      <a th:href="@{https://localhost:8443}" class="logo_item">SushiKhan</a>
     </div>
     <div class="email-page">
       <div th:if="${#lists.isEmpty(orders)}" class="empty-state">
@@ -29,5 +29,11 @@
         </div>
       </div>
     </div>
+    <footer class="footer">
+        <div class="footer__content">
+            <span class="footer__content-logo">SushiKhan</span>
+            <p class="footer__content-text">&copy; Dmitriy Rochshupkin 2026</p>
+        </div>
+    </footer>
 </body>
 </html>
