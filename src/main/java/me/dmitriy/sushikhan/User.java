@@ -53,7 +53,12 @@ public class User implements UserDetails, OAuth2User {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(this.role));
+        if (this.role == null || this.role.isBlank()) {
+            return List.of();
+        }
+        String secureRole = this.role.startsWith("ROLE_") ? this.role : "ROLE_" + this.role;
+
+        return List.of(new SimpleGrantedAuthority(secureRole));
     }
 
     @Override

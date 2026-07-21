@@ -17,9 +17,11 @@ public class RegistrationForm {
 
 
     public User toUser(PasswordEncoder encoder) {
+        String userRole = (this.role == null || this.role.isBlank()) ? "ROLE_USER" : this.role;
+
         return new User(
             username, encoder.encode(password),
-            fullname, street, city, region, phone, role
+            fullname, street, city, region, phone, userRole
         );
     }
 

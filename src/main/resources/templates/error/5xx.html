@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ForbiddenKhan</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<div class="error__page">
+    <div class="error__header">
+        <h1 th:text="${status}" class="error__header-title"></h1>
+    </div>
+    <div class="error__content">
+        <h2 class="error__content-title">Error on the server side</h2>
+        <a href="/" class="btn">Return to the main page!</a>
+        <p th:text="${message}"></p>
+    </div>
+</div>
+</body>
+</html>

@@ -893,6 +893,26 @@ select{
     object-fit: cover;
 }
 
+.error__page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 75vh;
+}
+.error__content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.error__content-title {
+    margin-bottom: 30px;
+}
+.error__header-title {
+    font-size: 100px;
+    color: #878787;
+}
+
 @media (max-width: 560px){
     .modal-content{
         width: 100%;
