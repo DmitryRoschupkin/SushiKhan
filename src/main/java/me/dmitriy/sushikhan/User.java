@@ -33,6 +33,9 @@ public class User implements UserDetails, OAuth2User {
     private String phone;
     private String role;
 
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private boolean enabled = true;
+
 
     public User(String username, String password, String fullname, String street, String city, String region, String phone, String role) {
 
@@ -49,6 +52,7 @@ public class User implements UserDetails, OAuth2User {
     public User() {
 
     }
+    
 
 
     @Override
@@ -154,7 +158,7 @@ public class User implements UserDetails, OAuth2User {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 
     public String getRole() {
@@ -163,5 +167,9 @@ public class User implements UserDetails, OAuth2User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

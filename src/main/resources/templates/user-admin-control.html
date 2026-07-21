@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>SushiKhan - User Management</title>
+  <link th:href="@{/styles.css}" rel="stylesheet" />
+</head>
+<body>
+
+<div id="security-context" th:data-token="${accessToken}" style="display: none;"></div>
+
+<div class="user-admin-page">
+  <header>
+    <div>
+      <span class="admin-page__eyebrow">Control Panel</span>
+      <h1>User Administration Panel</h1>
+    </div>
+    <a th:href="@{/ingredients/admin}" class="btn">Ingredients Admin</a>
+  </header>
+
+  <main class="list-section">
+    <div class="list-section__header">
+      <h2>Registered Users</h2>
+    </div>
+
+    <div class="table-scroll">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Full Name</th>
+          <th>Phone</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+          <td th:text="${user.id}">1</td>
+          <td th:text="${user.username}">johndoe</td>
+          <td th:text="${user.fullname}">John Doe</td>
+          <td th:text="${user.phone}">+123456789</td>
+          <td>
+            <span th:if="${user.enabled}" class="status-badge status-active">Active</span>
+            <span th:unless="${user.enabled}" class="status-badge status-banned">Banned</span>
+          </td>
+          <td>
+            <button type="button"
+                    class="btn-toggle-status"
+                    th:classappend="${user.enabled} ? 'btn-ban' : 'btn-unban'"
+                    th:data-id="${user.id}"
+                    th:data-enabled="${user.enabled}"
+                    th:text="${user.enabled} ? 'Ban' : 'Unban'">
+              Ban
+            </button>
+
+            <button type="button" class="btn-delete"
+                    th:data-id="${user.id}"
+                    th:data-username="${user.username}">
+              Delete
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<script th:src="@{/js/users-admin-control.js}"></script>
+</body>
+</html>

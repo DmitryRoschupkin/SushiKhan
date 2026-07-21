@@ -955,6 +955,85 @@ select{
 .home__page-main {
     flex: 1 0 auto;
 }
+
+/* ===== Users Admin Control ===== */
+
+.status-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.status-active {
+    background: #e2f5e3;
+    color: #2e6b32;
+    border: 1px solid #c3e8c5;
+}
+
+.status-banned {
+    background: #fde8e8;
+    color: #9b1c1c;
+    border: 1px solid #f8b4b4;
+}
+
+.btn-ban {
+    font-size: 0.82rem;
+    padding: 7px 14px;
+    border-radius: 5px;
+    border: 1px solid #f3e3f3;
+    background: plum;
+    color: #1a1a1a;
+    cursor: pointer;
+    margin-right: 6px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-ban:hover {
+    background: #cd74cd;
+    border-color: #cd74cd;
+}
+
+.btn-unban {
+    font-size: 0.82rem;
+    padding: 7px 14px;
+    border-radius: 5px;
+    border: 1px solid #c3e8c5;
+    background: #e2f5e3;
+    color: #2e6b32;
+    cursor: pointer;
+    margin-right: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-unban:hover {
+    background: #c3e8c5;
+}
+
+.user-admin-page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 40px 24px 64px;
+}
+
+.user-admin-page header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #eee;
+}
+
+.user-admin-page header h1 {
+    font-size: 1.7rem;
+    letter-spacing: 0.5px;
+}
+
 @media (max-width: 560px){
     .modal-content{
         width: 100%;
