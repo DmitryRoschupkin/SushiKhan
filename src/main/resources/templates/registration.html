@@ -8,9 +8,13 @@
     <title>SushiKhan</title>
 </head>
 <body>
-    <div class="logo">
-        <h1 class="logo_item">SushiKhan</h1>
-        <h2 class="logo_item">Registration</h2>
+<div class="register">
+    <div class="register__logo">
+        <h2 class="register__logo-title">SushiKhan</h2>
+        <h2 class="register__logo-subtitle">Registration</h2>
+    </div>
+    <div class="register__back">
+        <a href="/login" class="btn">BACK BAAACK!! I have an account already!)</a>
     </div>
     <div class="register-page">
         <form method="post" th:action="@{/register}" id="registerForm">
@@ -47,5 +51,6 @@
             <p class="footer__content-text">&copy; Dmitriy Rochshupkin 2026</p>
         </div>
     </footer>
+</div>
 </body>
 </html>

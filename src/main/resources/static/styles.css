@@ -313,7 +313,9 @@ input[type="submit"]:active{
     flex: 1 1 260px;
     min-height: 320px;
     border-radius: 14px;
+    overflow: hidden;
     background: linear-gradient(155deg, plum 0%, #f3e3f3 100%);
+    box-shadow: 0 0 25px 2px plum;
 }
 
 .login__form-wrap{
@@ -364,6 +366,25 @@ input[type="submit"]:active{
 }
 
 /* ===== Registration page ===== */
+.register {
+    display: flex;
+    flex-direction: column;
+}
+.register__back {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.register__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    min-height: 25vh;
+}
+.register__logo-title {
+    margin-right: 30px;
+}
 .register-page{
     max-width: 560px;
     margin: 0 auto;
