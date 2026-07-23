@@ -1,0 +1,98 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="_csrf" th:content="${_csrf?.token}"/>
+  <meta name="_csrf_header" th:content="${_csrf?.headerName}"/>
+  <link rel="stylesheet" th:href="@{/styles.css}">
+  <title>User Profile - SushiKhan</title>
+</head>
+<body>
+<div class="home__page">
+
+  <div class="user-menu-container">
+    <button type="button" class="btn-user-menu" id="userMenuBtn">
+      <span th:text="${#authentication?.name != null and #authentication?.name != 'anonymousUser'
+       ? #authentication.name : 'Account'}">User</span>
+      <span class="arrow">▾</span>
+    </button>
+
+    <div class="dropdown-menu" id="userMenu">
+      <a th:href="@{/profile}" class="dropdown-item">Profile Settings</a>
+      <a th:href="@{/}" class="dropdown-item">Home</a>
+      <div class="dropdown-divider"></div>
+      <form th:action="@{/logout}" method="post" style="margin: 0;">
+        <button type="submit" class="dropdown-item btn-logout">Log out</button>
+      </form>
+    </div>
+  </div>
+
+  <main class="profile-container">
+    <h2>User Profile Settings</h2>
+
+    <div id="statusAlert" class="alert" style="display: none;"></div>
+
+    <div th:if="${param.success}" class="alert alert-success">
+      Profile updated successfully!
+    </div>
+
+    <form th:action="@{/profile/{id}/edit(id=${profileUser.id})}" th:object="${profileUser}" method="post" id="profileForm" class="profile-form">
+
+      <input type="hidden" id="userId" th:value="${profileUser.id}"/>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" th:field="*{username}" class="form-input" />
+        <span class="error-msg" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" th:field="*{fullname}" class="form-input" />
+      </div>
+
+      <h3>Delivery Address</h3>
+
+      <div class="form-group">
+        <label for="street">Street</label>
+        <input type="text" id="street" th:field="*{street}" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" id="city" th:field="*{city}" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label for="region">State / Region</label>
+        <input type="text" id="region" th:field="*{region}" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" th:field="*{phone}" class="form-input" />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" id="saveBtn" class="btn-save">Save Changes</button>
+        <a th:href="@{/}" class="btn-cancel">Back to Home</a>
+      </div>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__content">
+      <span class="footer__content-logo">SushiKhan</span>
+      <p class="footer__content-text">&copy; Dmitriy Rochshupkin 2026</p>
+    </div>
+  </footer>
+</div>
+
+<script th:src="@{/js/user-menu.js}"></script>
+<script th:src="@{/js/profile-edit.js}"></script>
+
+</body>
+</html>
